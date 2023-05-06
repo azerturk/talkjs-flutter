@@ -345,6 +345,7 @@ Future<void> registerAndroidPushNotificationHandlers(
         ?.getActiveNotifications();
 
     if (activeNotifications != null) {
+      print("not null");
       for (final displayedNotification in activeNotifications) {
         if (displayedNotification.payload != null) {
           final Map<String, dynamic> talkjsData =
