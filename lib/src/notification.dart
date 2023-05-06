@@ -380,8 +380,8 @@ Future<void> registerAndroidPushNotificationHandlers(
 
   IsolateNameServer.registerPortWithName(
       _receivePort.sendPort, 'talkjsFCMPort');
-  _receivePort
-      .listen((message) async => await _onReceiveMessageFromPort(message));
+  _receivePort.listen(
+      (message) async => await _onReceiveMessageFromPort(json.decode(message)));
 
   FirebaseMessaging.onBackgroundMessage(_onFCMBackgroundMessage);
 }
