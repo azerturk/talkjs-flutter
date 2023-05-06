@@ -157,7 +157,7 @@ Future<void> _onFCMBackgroundMessage(RemoteMessage firebaseMessage) async {
 
   // onBackgroundMessage runs on a separate isolate, so we're passing the message to the main isolate
   IsolateNameServer.lookupPortByName('talkjsFCMPort')
-      ?.send(json.encode(firebaseMessage));
+      ?.send(json.encode(firebaseMessage.toMap()));
 }
 
 Future<void> _onReceiveMessageFromPort(RemoteMessage firebaseMessage) async {
@@ -339,6 +339,7 @@ Future<void> registerAndroidPushNotificationHandlers(
   _androidChannel = androidChannel;
 
   try {
+    print("enter");
     final activeNotifications = await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
