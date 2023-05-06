@@ -331,7 +331,7 @@ Future<void> registerAndroidPushNotificationHandlers(
 
   await _flutterLocalNotificationsPlugin.initialize(
     InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+      android: AndroidInitializationSettings('@mipmap/launcher_icon'),
     ),
     onDidReceiveNotificationResponse: _onSelectNotification,
   );
