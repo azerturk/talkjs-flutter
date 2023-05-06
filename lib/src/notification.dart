@@ -156,8 +156,7 @@ Future<void> _onFCMBackgroundMessage(RemoteMessage firebaseMessage) async {
   }
 
   // onBackgroundMessage runs on a separate isolate, so we're passing the message to the main isolate
-  IsolateNameServer.lookupPortByName('talkjsFCMPort')
-      ?.send(json.encode(firebaseMessage.toMap()));
+  IsolateNameServer.lookupPortByName('talkjsFCMPort')?.send(firebaseMessage);
 }
 
 Future<void> _onReceiveMessageFromPort(RemoteMessage firebaseMessage) async {
@@ -381,8 +380,8 @@ Future<void> registerAndroidPushNotificationHandlers(
 
   IsolateNameServer.registerPortWithName(
       _receivePort.sendPort, 'talkjsFCMPort');
-  _receivePort.listen(
-      (message) async => await _onReceiveMessageFromPort(json.decode(message)));
+  _receivePort
+      .listen((message) async => await _onReceiveMessageFromPort(message));
 
   FirebaseMessaging.onBackgroundMessage(_onFCMBackgroundMessage);
 }
